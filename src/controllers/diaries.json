@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "date": "2017-01-01",
+    "visibility": "poor",
+    "comment": "Prety scary fly"
+  },
+  {
+    "id": 2,
+    "date": "2017-01-01",
+    "visibility": "good",
+    "comment": "confortable fly"
+  },
+  {
+    "id": 3,
+    "date": "2019-01-01",
+    "visibility": "poor",
+    "comment": "Prety scary fly"
+  },
+  {
+    "id": 4,
+    "date": "2017-01-01",
+    "visibility": "poor",
+    "comment": "Prety scary fly"
+  }
+]
