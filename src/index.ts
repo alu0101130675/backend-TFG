@@ -6,9 +6,11 @@ import { notFound } from './middleware/notFound'
 import { connectionDB } from './mongo'
 import { initiativeRouter } from './routes/initiative'
 import { routerLogin } from './routes/login'
+import cors from 'cors'
 dotenv.config()
 connectionDB()
 export const app = express()
+app.use(cors())
 app.use(express.json()) // middleware que transforma la requestAnimationFrame.boy a un json
 const PORT = 3001
 

@@ -15,12 +15,23 @@ const userSchema = new mongoose.Schema({
     require: true
   },
   validated: {
-    type: String,
+    type: Boolean,
     require: true,
     default: false
   },
   link: String,
-  expirationDate: Date
+  active: {
+    type: Boolean,
+    require: true,
+    default: false
+  },
+  ComunidadAutonoma: String,
+  latitude: Number,
+  longitude: Number,
+  city: String,
+  postCode: Number,
+  contact: String,
+  road: String
 
 })
 export const Initiative = mongoose.model('Iniciativa', userSchema)

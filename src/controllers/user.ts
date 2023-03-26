@@ -2,15 +2,6 @@ import { UserModel } from '../models/user'
 import { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcrypt'
 
-/* export const diaryWihoutSensitiveInfo = (): NonSensitiveInfoDiary[] => {
-  return diary.map(({ id, date, visibility }) => {
-    return {
-      id,
-      date,
-      visibility
-    }
-  })
-} */
 export const findUserByIdAndPassword = (req: Request, res: Response, next: NextFunction): void => {
   const user = req.params
   console.log(user)

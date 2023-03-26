@@ -3,8 +3,28 @@ import { Initiative } from '../models/initiative'
 
 export function postInitiative (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
+  console.log('objeto a meter:', body)
   const initiative = new Initiative(body)
   initiative.save()
     .then(() => response.send({ message: 'innitiative added' })
+    ).catch(err => response.send(err))
+}
+
+export function getInitiative (request: Request, response: Response, next: NextFunction): void {
+  Initiative.find({})
+    .then((initiatives) => response.send(initiatives)
+    ).catch(err => response.send(err))
+}
+export function getInitiativeByFilter (request: Request, response: Response, next: NextFunction): void {
+  const params = request.params
+  Initiative.find(params)
+    .then((initiatives) => response.send(initiatives)
+    ).catch(err => response.send(err))
+}
+export function updateInitiative (request: Request, response: Response, next: NextFunction): void {
+  const body = request.body
+  const { id, validated, active } = body
+  Initiative.findOneAndUpdate(id, { validated, active }, { new: true })
+    .then((initiatives) => response.send(initiatives)
     ).catch(err => response.send(err))
 }
