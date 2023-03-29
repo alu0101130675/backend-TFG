@@ -26,7 +26,15 @@ export function getInitiativeByFilter (request: Request, response: Response, nex
 export function updateInitiative (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
   const { id, validated, active } = body
-  Initiative.findOneAndUpdate(id, { validated, active }, { new: true })
+  Initiative.findOneAndUpdate({ _id: id }, { validated, active }, { new: true })
     .then((initiatives) => response.send(initiatives)
+    ).catch(err => response.send(err))
+}
+export function deleteInitiative (request: Request, response: Response, next: NextFunction): void {
+  const body = request.body
+  const { id } = body
+  console.log('La id:', id)
+  Initiative.findOneAndRemove({ _id: id })
+    .then((res) => response.send({ menssage: res })
     ).catch(err => response.send(err))
 }

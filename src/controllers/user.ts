@@ -28,3 +28,11 @@ export const createUser = (req: Request, res: Response, next: NextFunction): voi
 export const getRole = (req: Request, res: Response, next: NextFunction): void => {
   res.send({ message: 'admin' })
 }
+export function deleteUser (request: Request, response: Response, next: NextFunction): void {
+  const body = request.body
+  const { id } = body
+  console.log('La id:', id)
+  UserModel.findOneAndRemove({ _id: id })
+    .then((res) => response.send({ menssage: res })
+    ).catch(err => response.send(err))
+}
