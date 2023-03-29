@@ -31,7 +31,10 @@ const userSchema = new mongoose.Schema({
   city: String,
   postCode: Number,
   contact: String,
-  road: String
-
+  road: String,
+  initiativeName: {
+    type: String,
+    require: true,
+  }
 })
 export const Initiative = mongoose.model('Iniciativa', userSchema)

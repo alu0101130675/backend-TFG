@@ -25,3 +25,6 @@ export const createUser = (req: Request, res: Response, next: NextFunction): voi
       newUser.save().then(() => res.send('succes')).catch(err => next(err))
     }).catch(err => next(err))
 }
+export const getRole = (req: Request, res: Response, next: NextFunction): void => {
+  res.send({ message: 'admin' })
+}

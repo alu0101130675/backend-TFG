@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from 'express'
 import { verify } from 'jsonwebtoken'
-export function userStractor (request: Request, response: Response, next: NextFunction): void {
+export function userExtractor (request: Request, response: Response, next: NextFunction): void {
   const authorization = request.get('authorization') ?? ''
   if (authorization.toLocaleLowerCase().startsWith('bearer')) {
     if (process.env.SECRET == null) {
@@ -13,6 +13,7 @@ export function userStractor (request: Request, response: Response, next: NextFu
     console.log('decode token ', decodeToken)
     if (typeof decodeToken === 'object') {
       request.body.email = decodeToken.email // add email property to request object
+      request.body.role = decodeToken.role
       next()
     }
   }

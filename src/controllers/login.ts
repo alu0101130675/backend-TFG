@@ -15,10 +15,10 @@ export async function login (request: Request, response: Response, next: NextFun
     } else {
       const correctPassword = await bcrypt.compare(password, user.password as string)
       if (correctPassword) {
-        const tokenForUser = { email: user.email }
+        const tokenForUser = { email: user.email, role: user.role }
         if (process.env.SECRET != null) {
           const token = sign(tokenForUser, process.env.SECRET)
-          const logedUser = { token }
+          const logedUser = { token, role: user.role }
           response.send(logedUser)
           return
         } else throw new Error('SECRET is not initialized')

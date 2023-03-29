@@ -17,7 +17,9 @@ export function getInitiative (request: Request, response: Response, next: NextF
 }
 export function getInitiativeByFilter (request: Request, response: Response, next: NextFunction): void {
   const params = request.params
-  Initiative.find(params)
+  const validParams = Object.fromEntries(Object.entries(params).filter(([_, value]) => value !== 'Todas'))
+  console.log(validParams)
+  Initiative.find(validParams)
     .then((initiatives) => response.send(initiatives)
     ).catch(err => response.send(err))
 }
