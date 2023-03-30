@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt'
 
 export const findUserByIdAndPassword = (req: Request, res: Response, next: NextFunction): void => {
   const user = req.params
-  console.log(user)
 
   UserModel.findOne(user)
     .then(user => {
@@ -31,7 +30,6 @@ export const getRole = (req: Request, res: Response, next: NextFunction): void =
 export function deleteUser (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
   const { id } = body
-  console.log('La id:', id)
   UserModel.findOneAndRemove({ _id: id })
     .then((res) => response.send({ menssage: res })
     ).catch(err => response.send(err))

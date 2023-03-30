@@ -9,8 +9,6 @@ export function connectionDB (): void {
       console.log('connected')
     }).catch(err => console.log(err))
   } else {
-    console.log(MONGO_DB_URI_TEST, MONGO_DB_URI, NODE_ENV)
-    console.log('esoooo', process.env.MONGO_DB_URI, 'aqurlollol')
     console.error('Environment variables MONGO_DB_URI and/or MONGO-DB-URI-TEST not defined')
   }
 }

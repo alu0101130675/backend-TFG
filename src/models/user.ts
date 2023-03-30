@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema({
     require: true,
     default: 'client'
   }
-
 })
 export const UserModel = mongoose.model('Usuario', userSchema)
 /* const user = new UserModel({

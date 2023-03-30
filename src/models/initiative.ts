@@ -35,6 +35,7 @@ const userSchema = new mongoose.Schema({
   initiativeName: {
     type: String,
     require: true,
-  }
+  },
+  contacto:String
 })
 export const Initiative = mongoose.model('Iniciativa', userSchema)
