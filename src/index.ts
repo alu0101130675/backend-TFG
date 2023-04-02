@@ -7,16 +7,18 @@ import { connectionDB } from './mongo'
 import { initiativeRouter } from './routes/initiative'
 import { routerLogin } from './routes/login'
 import cors from 'cors'
+import { dataRouter } from './routes/data'
 dotenv.config()
 connectionDB()
 export const app = express()
 app.use(cors())
-app.use(express.json()) // middleware que transforma la requestAnimationFrame.boy a un json
+app.use(express.json({limit:'10mb'})) // middleware que transforma la requestAnimationFrame.boy a un json
 const PORT = 3001
 
 app.use('/', userRouter)
 app.use('/login', routerLogin)
 app.use('/initiative', initiativeRouter)
+app.use('/data', dataRouter)
 
 app.use(notFound)
 
