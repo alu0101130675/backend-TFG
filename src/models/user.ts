@@ -22,7 +22,3 @@ const userSchema = new mongoose.Schema({
   }
 })
 export const UserModel = mongoose.model('Usuario', userSchema)
-/* const user = new UserModel({
-  email: 'example@gmail.co',
-  password: '1234566'
-}) */

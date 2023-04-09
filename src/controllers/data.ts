@@ -6,15 +6,17 @@ export function postData (request: Request, response: Response, next: NextFuncti
   const body = request.body
   const { collectionName } = request.params
   const { documentData, config } = body
-  const thingSchema = new Schema({}, { strict: false, autoIndex: false, _id: false })
-  const Data = mongoose.model(collectionName, thingSchema, collectionName)
   const dataSettings = new DataModel({ collectionName, config })
-  dataSettings.save().then().catch(err => next(err))
-  const documentsToInsert = documentData.map((row: any) => {
-    const document = new Data(row)
-    return document
-  })
-  Data.bulkSave(documentsToInsert).then((d) => response.send(d)).catch(err => next(err))
+  dataSettings.save()
+    .then(() => {
+      const thingSchema = new Schema({}, { strict: false, autoIndex: false, _id: false })
+      const Data = mongoose.model(collectionName, thingSchema, collectionName)
+      const documentsToInsert = documentData.map((row: any) => {
+        const document = new Data(row)
+        return document
+      })
+      Data.bulkSave(documentsToInsert).then((d) => response.send(d)).catch(err => next(err))
+    }).catch(err => next(err))
 }
 export function getFileNames (request: Request, response: Response, next: NextFunction): void {
   DataModel.find().select('collectionName -_id')
