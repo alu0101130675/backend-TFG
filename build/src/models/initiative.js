@@ -39,7 +39,7 @@ const userSchema = new mongoose_1.default.Schema({
     road: String,
     initiativeName: {
         type: String,
-        require: true,
+        require: true
     },
     contacto: String
 });

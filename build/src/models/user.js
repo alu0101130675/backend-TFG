@@ -27,7 +27,3 @@ const userSchema = new mongoose_1.default.Schema({
     }
 });
 exports.UserModel = mongoose_1.default.model('Usuario', userSchema);
-/* const user = new UserModel({
-  email: 'example@gmail.co',
-  password: '1234566'
-}) */

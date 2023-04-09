@@ -24,9 +24,9 @@ function getInitiativeByFilter(request, response, next) {
 exports.getInitiativeByFilter = getInitiativeByFilter;
 function updateInitiative(request, response, next) {
     const body = request.body;
-    const { id, validated, active } = body;
-    console.log('si se', id, validated, active);
-    initiative_1.Initiative.findOneAndUpdate({ _id: id }, { validated, active }, { new: true })
+    console.log('el body:', body);
+    const { id, validated, active, initiativeName, link, contacto } = body;
+    initiative_1.Initiative.findOneAndUpdate({ _id: id }, { validated, active, initiativeName, link, contacto }, { new: true })
         .then((initiatives) => response.send(initiatives)).catch(err => response.send(err));
 }
 exports.updateInitiative = updateInitiative;

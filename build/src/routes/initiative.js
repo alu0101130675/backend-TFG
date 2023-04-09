@@ -11,6 +11,6 @@ const userExtractor_1 = require("../middleware/userExtractor");
 exports.initiativeRouter = express_1.default.Router();
 exports.initiativeRouter.post('/', userExtractor_1.userExtractor, initiative_1.postInitiative);
 exports.initiativeRouter.get('/', initiative_1.getInitiative);
-exports.initiativeRouter.get('/:ComunidadAutonoma/:active?', initiative_1.getInitiativeByFilter); // mirar si hay que pasarl next aqui o estando en finduser ta bien
+exports.initiativeRouter.get('/:ComunidadAutonoma/:active?/:validated', initiative_1.getInitiativeByFilter); // mirar si hay que pasarl next aqui o estando en finduser ta bien
 exports.initiativeRouter.delete('/', userExtractor_1.userExtractor, adminCheck_1.adminCheck, initiative_1.deleteInitiative);
 exports.initiativeRouter.patch('/', userExtractor_1.userExtractor, adminCheck_1.adminCheck, initiative_1.updateInitiative);
