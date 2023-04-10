@@ -30,6 +30,7 @@ export const getRole = (req: Request, res: Response, next: NextFunction): void =
 export function deleteUser (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
   const { email } = body
+  console.log('email', email)
   UserModel.findOneAndRemove({ email })
     .then((res) => response.send({ menssage: res })
     ).catch(err => response.send(err))
