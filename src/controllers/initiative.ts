@@ -18,7 +18,6 @@ export function getInitiative (request: Request, response: Response, next: NextF
 export function getInitiativeByFilter (request: Request, response: Response, next: NextFunction): void {
   const params = request.params
   const validParams = Object.fromEntries(Object.entries(params).filter(([_, value]) => value !== 'Todas'))
-  console.log(validParams)
   Initiative.find(validParams)
     .then((initiatives) => response.send(initiatives)
     ).catch(err => response.send(err))
@@ -26,7 +25,6 @@ export function getInitiativeByFilter (request: Request, response: Response, nex
 
 export function updateInitiative (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
-  console.log('el body:', body)
   const { id, validated, active, initiativeName, link, contacto } = body
   Initiative.findOneAndUpdate({ _id: id }, { validated, active, initiativeName, link, contacto }, { new: true })
     .then((initiatives) => response.send(initiatives)

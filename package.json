@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "lint": "ts-standard",
     "dev": "NODE_ENV=development ts-node-dev src/index.ts",
-    "start": "NODE_ENV=production node build/index.js",
+    "start": "NODE_ENV=production node build/src/index.js",
     "test": "NODE_ENV=test jest --verbose --silent",
     "test:watch": "npm run test -- --watchAll"
   },
