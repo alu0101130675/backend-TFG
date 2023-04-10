@@ -34,8 +34,9 @@ const getRole = (req, res, next) => {
 exports.getRole = getRole;
 function deleteUser(request, response, next) {
     const body = request.body;
-    const { id } = body;
-    user_1.UserModel.findOneAndRemove({ _id: id })
+    const { email } = body;
+    console.log('email', email);
+    user_1.UserModel.findOneAndRemove({ email })
         .then((res) => response.send({ menssage: res })).catch(err => response.send(err));
 }
 exports.deleteUser = deleteUser;

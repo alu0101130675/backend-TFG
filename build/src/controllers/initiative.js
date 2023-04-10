@@ -17,14 +17,12 @@ exports.getInitiative = getInitiative;
 function getInitiativeByFilter(request, response, next) {
     const params = request.params;
     const validParams = Object.fromEntries(Object.entries(params).filter(([_, value]) => value !== 'Todas'));
-    console.log(validParams);
     initiative_1.Initiative.find(validParams)
         .then((initiatives) => response.send(initiatives)).catch(err => response.send(err));
 }
 exports.getInitiativeByFilter = getInitiativeByFilter;
 function updateInitiative(request, response, next) {
     const body = request.body;
-    console.log('el body:', body);
     const { id, validated, active, initiativeName, link, contacto } = body;
     initiative_1.Initiative.findOneAndUpdate({ _id: id }, { validated, active, initiativeName, link, contacto }, { new: true })
         .then((initiatives) => response.send(initiatives)).catch(err => response.send(err));
