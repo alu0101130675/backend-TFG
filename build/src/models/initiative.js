@@ -9,7 +9,7 @@ const validator_1 = __importDefault(require("validator"));
 const userSchema = new mongoose_1.default.Schema({
     email: {
         type: String,
-        require: true,
+        required: true,
         validate: {
             validator: (email) => validator_1.default.isEmail(email),
             message: 'Invalid email address'
@@ -17,29 +17,35 @@ const userSchema = new mongoose_1.default.Schema({
     },
     location: {
         type: String,
-        require: true
+        required: true
     },
     validated: {
         type: Boolean,
-        require: true,
+        required: true,
         default: false
     },
     link: String,
     active: {
         type: Boolean,
-        require: true,
+        required: true,
         default: false
     },
     ComunidadAutonoma: String,
-    latitude: Number,
-    longitude: Number,
+    latitude: {
+        type: Number,
+        required: true
+    },
+    longitude: {
+        type: Number,
+        required: true
+    },
     city: String,
     postCode: Number,
     contact: String,
     road: String,
     initiativeName: {
         type: String,
-        require: true
+        required: true
     },
     contacto: String
 });

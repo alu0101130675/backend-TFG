@@ -9,7 +9,7 @@ const validator_1 = __importDefault(require("validator"));
 const userSchema = new mongoose_1.default.Schema({
     email: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
         validate: {
             validator: (email) => validator_1.default.isEmail(email),
@@ -18,11 +18,11 @@ const userSchema = new mongoose_1.default.Schema({
     },
     password: {
         type: String,
-        require: true
+        required: true
     },
     role: {
         type: String,
-        require: true,
+        required: true,
         default: 'client'
     }
 });

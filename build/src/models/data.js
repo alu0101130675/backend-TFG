@@ -9,11 +9,11 @@ const dataSchema = new mongoose_1.default.Schema({
     collectionName: {
         type: String,
         unique: true,
-        require: true
+        required: true
     },
     config: {
         type: Array,
-        require: true
+        required: true
     }
 });
 exports.DataModel = mongoose_1.default.model('DataSettings', dataSchema);

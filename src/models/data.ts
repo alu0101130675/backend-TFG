@@ -4,11 +4,11 @@ const dataSchema = new mongoose.Schema({
   collectionName: {
     type: String,
     unique: true,
-    require: true
+    required: true
   },
   config: {
     type: Array,
-    require: true
+    required: true
   }
 })
 export const DataModel = mongoose.model('DataSettings', dataSchema)
