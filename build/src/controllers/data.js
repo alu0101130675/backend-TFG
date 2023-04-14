@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateConfigFile = exports.deleteFiles = exports.getConfigFileNames = exports.getDataByFileName = exports.getConfigFile = exports.getFileNames = exports.postData = void 0;
+exports.updateConfigFile = exports.deleteFiles = exports.getConfigFileNames = exports.getDataByFileName = exports.getAxes = exports.getConfigFile = exports.getFileNames = exports.postData = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const data_1 = require("../models/data");
 function postData(request, response, next) {
@@ -64,6 +64,13 @@ function getConfigFile(request, response, next) {
     }
 }
 exports.getConfigFile = getConfigFile;
+function getAxes(request, response, next) {
+    const name = request.params.name;
+    data_1.DataModel.findOne({ collectionName: name }).select('axes -_id')
+        .then((d) => response.send(d))
+        .catch(err => next(err));
+}
+exports.getAxes = getAxes;
 function getDataByFileName(request, response, next) {
     const name = request.params.name;
     mongoose_1.default.connection.collection(name, { strict: true })

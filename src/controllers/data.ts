@@ -36,6 +36,12 @@ export function getConfigFile (request: Request, response: Response, next: NextF
       .catch(err => next(err))
   }
 }
+export function getAxes (request: Request, response: Response, next: NextFunction): void {
+  const name = request.params.name
+  DataModel.findOne({ collectionName: name }).select('axes -_id')
+    .then((d) => response.send(d))
+    .catch(err => next(err))
+}
 export function getDataByFileName (request: Request, response: Response, next: NextFunction): void {
   const name = request.params.name
   mongoose.connection.collection(name, { strict: true })
