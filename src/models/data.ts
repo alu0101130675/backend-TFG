@@ -11,7 +11,6 @@ const dataSchema = new mongoose.Schema({
     required: true
   },
   axes: {
-    type: Array,
     required: true
   }
 })
