@@ -16,6 +16,7 @@ const dataSchema = new mongoose_1.default.Schema({
         required: true
     },
     axes: {
+        type: Object,
         required: true
     }
 });
