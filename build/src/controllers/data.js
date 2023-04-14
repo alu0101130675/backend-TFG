@@ -29,8 +29,8 @@ const data_1 = require("../models/data");
 function postData(request, response, next) {
     const body = request.body;
     const { collectionName } = request.params;
-    const { documentData, config } = body;
-    const dataSettings = new data_1.DataModel({ collectionName, config });
+    const { documentData, config, axes } = body;
+    const dataSettings = new data_1.DataModel({ collectionName, config, axes });
     dataSettings.save()
         .then(() => {
         const thingSchema = new mongoose_1.Schema({}, { strict: false, autoIndex: false, _id: false });

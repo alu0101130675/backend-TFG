@@ -5,8 +5,8 @@ import { DataModel } from '../models/data'
 export function postData (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
   const { collectionName } = request.params
-  const { documentData, config } = body
-  const dataSettings = new DataModel({ collectionName, config })
+  const { documentData, config, axes } = body
+  const dataSettings = new DataModel({ collectionName, config, axes })
   dataSettings.save()
     .then(() => {
       const thingSchema = new Schema({}, { strict: false, autoIndex: false, _id: false })

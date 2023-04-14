@@ -9,6 +9,10 @@ const dataSchema = new mongoose.Schema({
   config: {
     type: Array,
     required: true
+  },
+  axes: {
+    type: Array,
+    required: true
   }
 })
 export const DataModel = mongoose.model('DataSettings', dataSchema)

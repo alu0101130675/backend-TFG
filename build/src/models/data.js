@@ -14,6 +14,10 @@ const dataSchema = new mongoose_1.default.Schema({
     config: {
         type: Array,
         required: true
+    },
+    axes: {
+        type: Array,
+        required: true
     }
 });
 exports.DataModel = mongoose_1.default.model('DataSettings', dataSchema);
