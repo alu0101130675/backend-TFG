@@ -101,7 +101,7 @@ exports.deleteFiles = deleteFiles;
 function updateConfigFile(request, response, next) {
     const id = request.params.id;
     const body = request.body;
-    data_1.DataModel.findByIdAndUpdate(id, { config: body })
+    data_1.DataModel.findByIdAndUpdate(id, body)
         .then((d) => response.send(d))
         .catch(e => next(e));
 }

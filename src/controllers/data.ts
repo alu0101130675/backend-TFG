@@ -69,7 +69,7 @@ export function deleteFiles (request: Request, response: Response, next: NextFun
 export function updateConfigFile (request: Request, response: Response, next: NextFunction): void {
   const id = request.params.id
   const body = request.body
-  DataModel.findByIdAndUpdate(id, { config: body })
+  DataModel.findByIdAndUpdate(id, body)
     .then((d) => response.send(d))
     .catch(e => next(e))
 }
