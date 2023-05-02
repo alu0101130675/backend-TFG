@@ -14,29 +14,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const src_1 = require("../src");
-const user_1 = require("../src/models/user");
+const data_1 = require("../src/models/data");
 const helper_1 = require("./helper");
-const bcrypt_1 = __importDefault(require("bcrypt"));
 beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield user_1.UserModel.deleteMany({});
-    const saltRounds = 10;
-    const passwordHash = yield bcrypt_1.default.hash('prueba', saltRounds);
-    const newUser = new user_1.UserModel({ email: 'correo@gmail.com', password: passwordHash });
-    yield newUser.save();
+    yield data_1.DataModel.deleteMany({});
+    const newDataModel = new data_1.DataModel({
+        axes: { axeX: ['uno', 'dos', 'tres'], axeY: ['uno', 'dos', 'cinco', 'tres'] },
+        collectionName: 'nombre',
+        config: [['uno', 'dos', 'graficoBarras']]
+    });
+    yield newDataModel.save();
 }));
-describe('user tests', () => {
-    test('response is return as json', () => __awaiter(void 0, void 0, void 0, function* () {
+describe('DataModel tests', () => {
+    test('initiative response is return as json', () => __awaiter(void 0, void 0, void 0, function* () {
         yield helper_1.api.get('/user/correo@gm/prueba')
             .expect(200)
             .expect('Content-type', /application\/json/);
     }));
-    test('response is return as json', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield helper_1.api.get('/user/correo@gm/1234');
-        expect(response.body).toEqual({ response: 'it is not in database' });
+    test('configFile has to be equal to 1', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield helper_1.api.get('/data/configFiles');
+        expect(response.body.length).toEqual(1);
+    }));
+    test('configFile has axes', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield helper_1.api.get('/data/axes/nombre');
+        expect(response.body.axes.axeX).toContain('uno');
+        expect(response.body.axes.axeY).toContain('cinco');
     }));
 });
 afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield user_1.UserModel.deleteMany({});
+    yield data_1.DataModel.deleteMany({});
     src_1.server.close();
     mongoose_1.default.connection.close()
         .then(() => console.log('connecition closed succesfuly'))
