@@ -8,7 +8,7 @@ const userExtractor_1 = require("../middleware/userExtractor");
 exports.dataRouter = (0, express_1.Router)();
 exports.dataRouter.post('/:collectionName', userExtractor_1.userExtractor, adminCheck_1.adminCheck, data_1.postData);
 exports.dataRouter.post('/weighing/data', userExtractor_1.userExtractor, adminCheck_1.adminCheck, data_1.weighing);
-exports.dataRouter.get('/weighing', userExtractor_1.userExtractor, adminCheck_1.adminCheck, data_1.getWeighing);
+exports.dataRouter.get('/weighing', data_1.getWeighing);
 exports.dataRouter.get('/fileNames', data_1.getFileNames);
 exports.dataRouter.get('/configFiles', data_1.getConfigFileNames);
 exports.dataRouter.get('/configField/:name/:idFlag?', data_1.getConfigFile);
