@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import mongoose, { Schema } from 'mongoose'
 import { DataModel } from '../models/data'
+import { WeighingModel } from '../models/weighing'
 
 export function postData (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
@@ -72,4 +73,27 @@ export function updateConfigFile (request: Request, response: Response, next: Ne
   DataModel.findByIdAndUpdate(id, body)
     .then((d) => response.send(d))
     .catch(e => next(e))
+}
+
+export function weighing (request: Request, response: Response, next: NextFunction): void {
+  const body = request.body
+  const { weighing } = body
+  const weighingToSave = new WeighingModel({ weighing })
+  weighingToSave.save()
+    .then((res) => response.send({ message: 'weighing added successfuly' }))
+    .catch(err => next(err))
+}
+export function getWeighing (request: Request, response: Response, next: NextFunction): void {
+  WeighingModel.findOne()
+    .then(d => {
+      const res = d ?? 'empty'
+      response.send(res)
+    })
+    .catch(err => next(err))
+}
+export function updateWeighing (request: Request, response: Response, next: NextFunction): void {
+  const body = request.body
+  WeighingModel.findOneAndUpdate({}, body)
+    .then(d => response.send({ message: 'update successfuly' }))
+    .catch(err => next(err))
 }

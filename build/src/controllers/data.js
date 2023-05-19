@@ -23,9 +23,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateConfigFile = exports.deleteFiles = exports.getConfigFileNames = exports.getDataByFileName = exports.getAxes = exports.getConfigFile = exports.getFileNames = exports.postData = void 0;
+exports.updateWeighing = exports.getWeighing = exports.weighing = exports.updateConfigFile = exports.deleteFiles = exports.getConfigFileNames = exports.getDataByFileName = exports.getAxes = exports.getConfigFile = exports.getFileNames = exports.postData = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const data_1 = require("../models/data");
+const weighing_1 = require("../models/weighing");
 function postData(request, response, next) {
     const body = request.body;
     const { collectionName } = request.params;
@@ -106,3 +107,28 @@ function updateConfigFile(request, response, next) {
         .catch(e => next(e));
 }
 exports.updateConfigFile = updateConfigFile;
+function weighing(request, response, next) {
+    const body = request.body;
+    const { weighing } = body;
+    const weighingToSave = new weighing_1.WeighingModel({ weighing });
+    weighingToSave.save()
+        .then((res) => response.send({ message: 'weighing added successfuly' }))
+        .catch(err => next(err));
+}
+exports.weighing = weighing;
+function getWeighing(request, response, next) {
+    weighing_1.WeighingModel.findOne()
+        .then(d => {
+        const res = d !== null && d !== void 0 ? d : 'empty';
+        response.send(res);
+    })
+        .catch(err => next(err));
+}
+exports.getWeighing = getWeighing;
+function updateWeighing(request, response, next) {
+    const body = request.body;
+    weighing_1.WeighingModel.findOneAndUpdate({}, body)
+        .then(d => response.send({ message: 'update successfuly' }))
+        .catch(err => next(err));
+}
+exports.updateWeighing = updateWeighing;
