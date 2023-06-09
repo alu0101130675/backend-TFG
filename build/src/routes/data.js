@@ -14,6 +14,8 @@ exports.dataRouter.get('/configFiles', data_1.getConfigFileNames);
 exports.dataRouter.get('/configField/:name/:idFlag?', data_1.getConfigFile);
 exports.dataRouter.get('/axes/:name', data_1.getAxes);
 exports.dataRouter.get('/dataFile/:name', data_1.getDataByFileName);
+exports.dataRouter.get('/description/:id', data_1.getDescription);
 exports.dataRouter.delete('/dataFile/:name/:id', userExtractor_1.userExtractor, adminCheck_1.adminCheck, data_1.deleteFiles);
 exports.dataRouter.put('/configFiles/:id', userExtractor_1.userExtractor, adminCheck_1.adminCheck, data_1.updateConfigFile);
 exports.dataRouter.put('/weighing', userExtractor_1.userExtractor, adminCheck_1.adminCheck, data_1.updateWeighing);
+exports.dataRouter.put('/collectionName/:name/:id/:newName', userExtractor_1.userExtractor, adminCheck_1.adminCheck, data_1.updateCollectionName);

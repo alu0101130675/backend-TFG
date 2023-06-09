@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateWeighing = exports.getWeighing = exports.weighing = exports.updateConfigFile = exports.deleteFiles = exports.getConfigFileNames = exports.getDataByFileName = exports.getAxes = exports.getConfigFile = exports.getFileNames = exports.postData = void 0;
+exports.getDescription = exports.updateCollectionName = exports.updateWeighing = exports.getWeighing = exports.weighing = exports.updateConfigFile = exports.deleteFiles = exports.getConfigFileNames = exports.getDataByFileName = exports.getAxes = exports.getConfigFile = exports.getFileNames = exports.postData = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const data_1 = require("../models/data");
 const weighing_1 = require("../models/weighing");
@@ -132,3 +132,29 @@ function updateWeighing(request, response, next) {
         .catch(err => next(err));
 }
 exports.updateWeighing = updateWeighing;
+function updateCollectionName(request, response, next) {
+    var _a, _b;
+    const name = request.params.name;
+    const id = request.params.id;
+    const collectionName = request.params.newName;
+    const description = (_b = (_a = request.body) === null || _a === void 0 ? void 0 : _a.description) !== null && _b !== void 0 ? _b : '';
+    data_1.DataModel.findByIdAndUpdate({ _id: id }, { collectionName, description }, { new: true })
+        .then(() => {
+        if (collectionName !== name) {
+            mongoose_1.default.connection.collection(name).rename(collectionName)
+                .then().catch(e => next(e));
+        }
+        response.send({ message: 'Updated' });
+    }).catch(e => next(e));
+}
+exports.updateCollectionName = updateCollectionName;
+function getDescription(request, response, next) {
+    const id = request.params.id;
+    data_1.DataModel.findById(id).select('description -_id')
+        .then((res) => {
+        (res != null)
+            ? response.send(res)
+            : response.send({ message: ' not found' });
+    }).catch(e => next(e));
+}
+exports.getDescription = getDescription;

@@ -83,6 +83,7 @@ export function weighing (request: Request, response: Response, next: NextFuncti
     .then((res) => response.send({ message: 'weighing added successfuly' }))
     .catch(err => next(err))
 }
+
 export function getWeighing (request: Request, response: Response, next: NextFunction): void {
   WeighingModel.findOne()
     .then(d => {
@@ -91,9 +92,34 @@ export function getWeighing (request: Request, response: Response, next: NextFun
     })
     .catch(err => next(err))
 }
+
 export function updateWeighing (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
   WeighingModel.findOneAndUpdate({}, body)
     .then(d => response.send({ message: 'update successfuly' }))
     .catch(err => next(err))
+}
+
+export function updateCollectionName (request: Request, response: Response, next: NextFunction): void {
+  const name = request.params.name
+  const id = request.params.id
+  const collectionName = request.params.newName
+  const description = request.body?.description ?? ''
+  DataModel.findByIdAndUpdate({ _id: id }, { collectionName, description }, { new: true })
+    .then(() => {
+      if (collectionName !== name) {
+        mongoose.connection.collection(name).rename(collectionName)
+          .then().catch(e => next(e))
+      }
+      response.send({ message: 'Updated' })
+    }).catch(e => next(e))
+}
+export function getDescription (request: Request, response: Response, next: NextFunction): void {
+  const id = request.params.id
+  DataModel.findById(id).select('description -_id')
+    .then((res) => {
+      (res != null)
+        ? response.send(res)
+        : response.send({ message: ' not found' })
+    }).catch(e => next(e))
 }
