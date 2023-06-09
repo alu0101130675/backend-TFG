@@ -13,6 +13,11 @@ const dataSchema = new mongoose.Schema({
   axes: {
     type: Object,
     required: true
+  },
+  description: {
+    type: String,
+    unique: true,
+    required: true
   }
 })
 export const DataModel = mongoose.model('DataSettings', dataSchema)

@@ -6,8 +6,8 @@ import { WeighingModel } from '../models/weighing'
 export function postData (request: Request, response: Response, next: NextFunction): void {
   const body = request.body
   const { collectionName } = request.params
-  const { documentData, config, axes } = body
-  const dataSettings = new DataModel({ collectionName, config, axes })
+  const { documentData, config, axes, description } = body
+  const dataSettings = new DataModel({ collectionName, config, axes, description })
   dataSettings.save()
     .then(() => {
       const thingSchema = new Schema({}, { strict: false, autoIndex: false, _id: false })
@@ -32,7 +32,7 @@ export function getConfigFile (request: Request, response: Response, next: NextF
       .then((d) => response.send(d))
       .catch(err => next(err))
   } else {
-    DataModel.findOne({ collectionName: name }).select('config -_id')
+    DataModel.findOne({ collectionName: name }).select('config description -_id')
       .then((d) => response.send(d))
       .catch(err => next(err))
   }

@@ -18,6 +18,11 @@ const dataSchema = new mongoose_1.default.Schema({
     axes: {
         type: Object,
         required: true
+    },
+    description: {
+        type: String,
+        unique: true,
+        required: true
     }
 });
 exports.DataModel = mongoose_1.default.model('DataSettings', dataSchema);

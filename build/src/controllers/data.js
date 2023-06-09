@@ -30,8 +30,8 @@ const weighing_1 = require("../models/weighing");
 function postData(request, response, next) {
     const body = request.body;
     const { collectionName } = request.params;
-    const { documentData, config, axes } = body;
-    const dataSettings = new data_1.DataModel({ collectionName, config, axes });
+    const { documentData, config, axes, description } = body;
+    const dataSettings = new data_1.DataModel({ collectionName, config, axes, description });
     dataSettings.save()
         .then(() => {
         const thingSchema = new mongoose_1.Schema({}, { strict: false, autoIndex: false, _id: false });
@@ -59,7 +59,7 @@ function getConfigFile(request, response, next) {
             .catch(err => next(err));
     }
     else {
-        data_1.DataModel.findOne({ collectionName: name }).select('config -_id')
+        data_1.DataModel.findOne({ collectionName: name }).select('config description -_id')
             .then((d) => response.send(d))
             .catch(err => next(err));
     }
