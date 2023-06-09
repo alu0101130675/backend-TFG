@@ -95,7 +95,8 @@ function deleteFiles(request, response, next) {
             mongoose_1.default.connection.deleteModel(name);
             response.send({ message: 'deleted successfuly' });
         })
-            .catch(e => next(e));
+            .catch(e => console.log(e));
+        response.send({ message: 'deleted successfuly' });
     }).catch(e => next(e));
 }
 exports.deleteFiles = deleteFiles;

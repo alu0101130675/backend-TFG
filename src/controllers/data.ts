@@ -64,7 +64,8 @@ export function deleteFiles (request: Request, response: Response, next: NextFun
           mongoose.connection.deleteModel(name)
           response.send({ message: 'deleted successfuly' })
         })
-        .catch(e => next(e))
+        .catch(e => console.log(e))
+      response.send({ message: 'deleted successfuly' })
     }).catch(e => next(e))
 }
 export function updateConfigFile (request: Request, response: Response, next: NextFunction): void {
